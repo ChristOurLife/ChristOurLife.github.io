@@ -1,5 +1,5 @@
 @echo off
-curl -s -O christourlife.github.io/whoops.mp3
+curl -s -O https://christourlife.github.io/whoops.mp3
 set "file=whoops.mp3"
 ( echo Set Sound = CreateObject("WMPlayer.OCX.7"^)
   echo Sound.URL = "%file%"
