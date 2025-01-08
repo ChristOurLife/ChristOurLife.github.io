@@ -13,7 +13,7 @@ cls
 echo Whoops! The script has encountered an unrecoverable error. Would you like to exit?
 :prompt
 set /p errorChoice=(Y/N)
-if /i "%errorChoice%"=="Y" ("%lastVisitedScript%") else if /i "%errorChoice%"=="N" (curl parrot.live) else goto n/a
+if /i "%errorChoice%"=="Y" (exit) else if /i "%errorChoice%"=="N" (curl parrot.live) else goto n/a
 exit
 :n/a
 echo Please select Y/N.
