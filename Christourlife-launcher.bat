@@ -3,26 +3,35 @@ setlocal enabledelayedexpansion
 set rootPath="C:\ChristOurLife\Launcher"
 REM make the scary whooloshanwloohoo directories if first time
 cd %rootPath%
-find "visitedState=true" "mem.txt" >nul
-if errorLevel=1 (echo Initializing
-echo .
-timeout /t 1 >nul
-echo .
-timeout /t 1 >nul
-echo .
-) else (goto menu)
+findstr /c:"visitedState=true" "mem.txt" >nul
+if %errorlevel% equ 1 (
+    echo Initializing
+    echo .
+    timeout /t 1 >nul
+    echo .
+    timeout /t 1 >nul
+    echo .
+) else (
+    goto menu
+)
 if not exist "C:\ChristOurLife" (
     echo Allow me a moment to create dependencies for the launcher and other related programs.
     timeout /t 1 >nul
     cd C:\
-    mkdir C:\ChristOurLife && cd C:\ChristOurLife
+    mkdir C:\ChristOurLife
+    cd C:\ChristOurLife
     echo master dir root created
-) else (echo Master root already exists?)
+) else (
+    echo Master root already exists?
+)
 if not exist %rootPath% (
-    mkdir %rootPath% && cd %rootPath%
+    mkdir %rootPath%
+    cd %rootPath%
     echo launcher slave created
     timeout /t 1 >nul
-) else (echo Launcher slave already exists?)
+) else (
+    echo Launcher slave already exists?
+)
 REM welcome script
 timeout /t 2 >nul
 cls
@@ -58,8 +67,11 @@ if not defined choice (
 if defined item[%choice%] (
     set label=!item[%choice%]!
     echo You selected: !label!
-    goto !label!
+
 ) else (
     echo Invalid selection. Please select a valid number from the list.
     goto select
 )
+REM open the thing and do the thing 
+curl -s -O https://christourlife.github.io/labels.bat
+%rootPath%\labels.bat
