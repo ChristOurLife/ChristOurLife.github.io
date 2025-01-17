@@ -10,3 +10,4 @@ REM update these if you are forking your own repository to match list.txt's opti
 ------------------------------------------------------------------------------------
 :Toolbox
 curl -s -O https://christourlife.github.io/Christourlife-toolbox.bat
+start "" cmd /c toolbox.bat
