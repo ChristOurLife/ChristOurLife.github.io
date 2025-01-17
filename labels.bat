@@ -1,15 +1,19 @@
 @echo off  
 setlocal enabledelayedexpansion
 cd C:\ChristOurLife\Launcher
+
+REM Ensure the label is defined before using it
+if not defined label (
+    echo The label is not defined. Please use the launcher.
+    timeout /t 3 >nul
+    exit
+)
+
 goto %label%
-if errorLevel=1 (
-    echo Either this script is bugged (likely), or you launched labels.bat on its own. Please use the launcher.
-) 
-timeout /t 3 >nul
+
 REM update these if you are forking your own repository to match list.txt's options
 ------------------------------------------------------------------------------------
 :Toolbox
 curl -s -O https://christourlife.github.io/Christourlife-toolbox.bat
-start "" cmd /c toolbox.bat
-toolbox.bat
-echo erm
+start "" cmd /c Christourlife-toolbox.bat
+exit
