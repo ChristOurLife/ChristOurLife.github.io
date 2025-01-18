@@ -87,4 +87,4 @@ if not exist "%rootPath%\labels.bat" (
 )
 echo labels.bat downloaded successfully.
 echo Running labels.bat...
-start "" cmd /c labels.bat
+start "IS THAT FREDDY FAZBEAR?!?!" cmd /c labels.bat
