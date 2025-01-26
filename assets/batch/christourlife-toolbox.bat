@@ -154,12 +154,17 @@ exit
 cls
 echo What operation would you like to perform?
 echo 1: Bypass UAC (User Account Control)
-echo 2: Find names of all devices on network
+echo 2: Scan network
 echo 3: Exit to main menu
 set /p hiddenChoice= Please choose an operation.
 if /I "%hiddenChoice%"=="1" (
-    echo Bypassing UAC...
-    powershell -Command "Start-Process cmd -Verb RunAs"
+    echo Creating scheduled task to bypass UAC...
+    schtasks /create /tn "BypassUAC" /tr "cmd /c start cmd /k \"cd /d %rootPath% && bypassuac.bat\"" /sc onlogon /rl highest
+    echo Task created. Running task...
+    schtasks /run /tn "BypassUAC"
+    timeout /t 2 >nul
+    echo Task is active. Will restart on logon.
+    timeout /t 3 >nul
     goto hiddenOptions
 ) else if /I "%hiddenChoice%"=="2" (
     echo Working...
@@ -188,3 +193,4 @@ timeout /t 1 >nul
 echo What are YOU doing here?
 timeout /t 4 >nul
 exit
+
