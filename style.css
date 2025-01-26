@@ -1,0 +1,67 @@
+
+/* Hi my name is carmen winstead AUGUAHHGHAHHGAHHG */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #a4da9d;
+    color: #333;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: #422eb1;
+    color: #000000;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Navigation */
+nav {
+    margin: 20px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Main content */
+main {
+    margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+    background: #412bbd;
+    color: #00000000;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
