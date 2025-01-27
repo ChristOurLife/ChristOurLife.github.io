@@ -1,4 +1,5 @@
 @echo off 
+REM set up basic things
 set agreement=TOSSignCheck.txt
 set rootPath=C:\ChristOurLife\Essentials
 cd %rootPath%
@@ -16,6 +17,12 @@ if %errorlevel% neq 0 (
     curl -s -O https://christourlife.github.io/error.bat
     error.bat
 )
+REM Load settings into RAM
+set /p fastMode=<settings.txt
+for /f "skip=1 tokens=*" %%a in (settings.txt) do (
+    set "programInfo=%%a"
+)
+REM Check if TOS has been signed
 :Agreement
 findstr /c:"firstVisit=1" "mem.txt" >nul
 if %errorlevel% neq 0 goto menu
@@ -73,6 +80,89 @@ else (
     echo Please select a valid option.
     goto menuChoice
 )
+:settings
+cls
+echo 1: Fast mode
+echo 2: Program Info
+echo 3: Exit
+set /p settingsChoice= Please select an option.
+if "%settingsChoice%"=="1" (
+    :
+    echo Fast mode will affect programs that require user input. This can allow for completely automatic installations.
+    timeout /t 1 >nul
+    echo There are two options for fast mode: Skip programs that require user input, or launch all programs that require user input in the backround.
+    timeout /t 1 >nul
+    set /p fastModeChoice= Toggle fast mode [1/2]:
+    if "%fastModeChoice%"=="1" (
+        if "%fastMode%"=="1" (
+            echo Fast mode has now been disabled.
+            set fastMode=0
+            timeout /t 2 >nul
+            goto settings
+        ) else (cls)
+        echo Fast mode is now enabled. Programs that require user input will be skipped.
+        set fastMode=1
+        timeout /t 2 >nul
+        goto menu
+    ) else if "%fastModeChoice%"=="2" (
+        if "%fastMode%"=="2" (
+            echo Fast mode has now been disabled.
+            set fastMode=0
+            timeout /t 2 >nul
+            goto settings
+        ) else (cls)
+        echo Fast mode is now enabled. Programs that require user input will be launched in the backround.
+        timeout /t 1 >nul
+        goto menu
+    ) else (
+        echo Please select a valid option.
+        timeout /t 1 >nul
+        goto settings
+    )
+    goto menu
+) else if "%settingsChoice%"=="2" (
+    echo This setting toggles program info, almost like tooltips. This is useful for programs that you are not familiar with. Descriptions of programs will be displayed with their names.
+    timeout /t 1 >nul
+    set /p programInfoChoice Toggle Program Info? [Y/N]
+    if     "%programInfoChoice%"=="Y" (
+        if "%programInfo%"=="1" (
+            echo Program info has now been disabled.
+            set programInfo=0
+            timeout /t 2 >nul
+            goto settings
+        ) else (cls)
+        echo Program info is now enabled. Descriptions of programs will be displayed with their names.
+        set programInfo=1
+        timeout /t 2 >nul
+        goto menu
+    ) else if "%programInfoChoice%"=="N" (
+        if "%programInfo%"=="0" (
+            echo Program info is already disabled.
+            timeout /t 2 >nul
+            goto settings
+        ) else (cls)
+        echo Program info is now disabled. Descriptions of programs will not be displayed with their names.
+        set programInfo=0
+        timeout /t 2 >nul
+        goto menu
+    ) else (
+        echo Please select a valid option.
+        timeout /t 1 >nul
+        goto settings
+    )
+
+    goto menu
+) else if "%settingsChoice%"=="3" (
+    echo Saving...
+    timeout /t 1 >nul
+    echo "%fastMode%" > settings.txt
+    echo "%programInfo%" >> settings.txt
+)
+else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto settings
+    )
 :installEssentials
 cls
 echo Note: Most of these programs are 64 bit. Do create an issue on GitHub if you want 32 bit versions.
@@ -95,6 +185,10 @@ else (
     timeout /t 1 >nul
     goto installEssentials
 )
+
+
+
+
 :regularEssentials
 cls
 echo You have started the installation of Regular Essentials. Type "exit" to cancel at any time. You will have to uninstall any programs you don't want to keep.
@@ -129,7 +223,8 @@ if "%regularChoice1%"=="1" (
     curl -s -O https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US
     start /wait "Firefox Setup 118.0.2.exe"
     del "Firefox Setup 118.0.2.exe"
-) else (
+)   else if "%regularChoice1%"=="exit" goto menu
+else (
     echo Please select a valid option.
     timeout /t 1 >nul
     goto regularEssentials
