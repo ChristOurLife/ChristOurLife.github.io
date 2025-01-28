@@ -14,4 +14,4 @@ if not defined label (
 REM update these if you are forking your own repository to match list.txt's options
 :toolbox
 curl -s -O https://christourlife.github.io/toolbox.bat
-cmd /c "Toolbox by ChristOurLife" toolbox.bat
+cmd /c toolbox.bat
