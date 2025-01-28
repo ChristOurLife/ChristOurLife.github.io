@@ -73,10 +73,10 @@ if defined item[%choice%] (
     goto select
 )
 REM open the thing and do the thing 
-echo Downloading labels.bat...
+echo Downloading needed files...
 curl -s -O https://christourlife.github.io/labels.bat
 if %errorlevel% neq 0 (
-    echo Failed to download labels.bat. Check your internet connection and try again.
+    echo Failed to download a needed file. Check your internet connection and try again.
     timeout /t 5 >nul
     exit
 )
