@@ -15,3 +15,8 @@ REM update these if you are forking your own repository to match list.txt's opti
 :Toolbox
 curl -s -O https://christourlife.github.io/toolbox.bat
 cmd /c toolbox.bat
+timeout /t 5 >nul
+pause
+if errorlevel neq 0 (
+echo ruh roh
+) else (echo all good)
