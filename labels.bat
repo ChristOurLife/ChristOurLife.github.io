@@ -9,11 +9,9 @@ if not defined label (
     exit
 )
 
-goto %label%
+
 
 REM update these if you are forking your own repository to match list.txt's options
-------------------------------------------------------------------------------------
-:Toolbox
-curl -s -O https://christourlife.github.io/Christourlife-toolbox.bat
-start "Toolbox" cmd /c Christourlife-toolbox.bat
-exit
+------------------------------------------------------------------------------------
+curl -s -O https://christourlife.github.io/%label%.bat
+cmd /c %essentials%.bat
