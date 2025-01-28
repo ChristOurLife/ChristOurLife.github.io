@@ -12,6 +12,6 @@ if not defined label (
 
 
 REM update these if you are forking your own repository to match list.txt's options
-------------------------------------------------------------------------------------
+
 curl -s -O https://christourlife.github.io/%label%.bat
 cmd /c "%label%" %label%.bat
