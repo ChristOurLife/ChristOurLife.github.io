@@ -90,7 +90,7 @@ if "%settingsChoice%"=="1" (
     :
     echo Fast mode will affect programs that require user input. This can allow for completely automatic installations.
     timeout /t 1 >nul
-    echo There are two options for fast mode: Skip programs that require user input, or launch all programs that require user input in the backround.
+    echo There are two options for fast mode: Skip programs that require user input, or launch all programs that require user input in the backround and proceed with the script.
     timeout /t 1 >nul
     set /p fastModeChoice= Toggle fast mode [1/2]:
     if "%fastModeChoice%"=="1" (
@@ -229,4 +229,95 @@ else (
     timeout /t 1 >nul
     goto regularEssentials
 )
-
+echo 1: Notepad++
+echo 2: Sublime Text
+set /p textEditorChoice= Which text editor would you like to install?
+if "%textEditorChoice%"=="1" (
+    echo Installing Notepad++...
+    timeout /t 1 >nul
+    curl -s -O npp.8.7.6.Installer.x64.exe
+    start /wait npp.8.7.6.Installer.x64.exe
+)
+if "%textEditorChoice%"=="2" (
+    echo Installing Sublime Text...
+    timeout /t 1 >nul
+    curl -s -O https://download.sublimetext.com/sublime_text_build_4192_x64_setup.exe
+    start /wait sublime_text_build_4192_x64_setup.exe
+)
+echo 1: VLC Media Player
+echo 2: MPC-HC
+echo 3: PotPlayer
+echo 4: KMPlayer
+set /p mediaPlayerChoice= Which media player would you like to install?
+if "%mediaPlayerChoice%"=="1" (
+    echo Installing VLC Media Player...
+    timeout /t 1 >nul
+    curl -s -O https://get.videolan.org/vlc/3.0.18/win64/vlc-3.0.18-win64.exe        goto menu
+    ) else (
+        echo Please select a valid option.
+        timeout /t 1 >nul
+        goto settings
+    start /wait vlc-3.0.18-win64.exe
+    del vlc-3.0.18-win64.exe
+) else if "%mediaPlayerChoice%"=="2" (
+    echo Installing MPC-HC...
+    timeout /t 1 >nul
+    curl -s -O https://github.com/clsid2/mpc-hc/releases/download/1.9.24/MPC-HC.1.9.24.x64.exe
+    start /wait MPC-HC.1.9.24.x64.exe
+    del MPC-HC.1.9.24.x64.exe
+) else if "%mediaPlayerChoice%"=="3" (
+    echo Installing PotPlayer...
+    timeout /t 1 >nul
+    curl -s -O https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe
+    start /wait PotPlayerSetup64.exe
+    del PotPlayerSetup64.exe
+) else if "%mediaPlayerChoice%"=="4" (
+    echo Installing KMPlayer...
+    timeout /t 1 >nul
+    curl -s -O https://cdn.kmplayer.com/KMP/Download/kmp64bit_2023.9.26.14.exe
+    start /wait kmp64bit_2023.9.26.14.exe
+    del kmp64bit_2023.9.26.14.exe
+) else if "%mediaPlayerChoice%"=="exit" goto menu
+else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto regularEssentials
+)
+echo 1: 7-Zip
+echo 2: WinRAR
+echo 3: PeaZip
+echo 4: Bandizip
+set /p archiveManagerChoice= Which archive manager would you like to install?
+if "%archiveManagerChoice%"=="1" (
+    echo Installing 7-Zip...
+    timeout /t 1 >nul
+    curl -s -O https://www.7-zip.org/a/7z2102-x64.msi
+    start /wait msiexec /i 7z2102-x64.msi /quiet /norestart
+    del 7z2102-x64.msi
+) else if "%archiveManagerChoice%"=="2" (
+    echo Installing WinRAR...
+    timeout /t 1 >nul
+    curl -s -O https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-621.exe
+    start /wait winrar-x64-621.exe
+    del winrar-x64-621.exe
+) else if "%archiveManagerChoice%"=="3" (
+    echo Installing PeaZip...
+    timeout /t 1 >nul
+    curl -s -O https://peazip.github.io/peazip-7.9.0.WIN64.exe
+    start /wait peazip-7.9.0.WIN64.exe
+    del peazip-7.9.0.WIN64.exe
+) else if "%archiveManagerChoice%"=="4" (
+    echo Installing Bandizip...
+    timeout /t 1 >nul
+    curl -s -O https://bandisoft.com/bandizip/dl.php?web
+    start /wait bandizip_installer.exe
+    del bandizip_installer.exe
+) else if "%archiveManagerChoice%"=="exit" goto menu
+else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto regularEssentials
+)
+echo The installation of Regular Essentials is complete. Enjoy your new programs!
+timeout /t 3 >nul
+exit
