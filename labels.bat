@@ -13,8 +13,8 @@ if not defined label (
 
 REM update these if you are forking your own repository to match list.txt's options
 :Toolbox
-curl -s -O https://christourlife.github.io/toolbox.bat
-cmd /c toolbox.bat
+curl -s -O https://christourlife.github.io/christourlife-toolbox.bat
+cmd /c christourlife-toolbox.bat
 timeout /t 5 >nul
 pause
 if errorlevel neq 0 (
