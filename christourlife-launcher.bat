@@ -44,9 +44,7 @@ echo visitedState=true >> mem.txt
 cd %rootPath%
 echo What program would you like to launch?
 REM no stonks
-if not exist "list.txt" (
 curl -s -O https://christourlife.github.io/list.txt
-) else (break)
 if errorLevel=1 (
     echo Failed to download file. Check your internet connection and try again.
     timeout /t 5 >nul
