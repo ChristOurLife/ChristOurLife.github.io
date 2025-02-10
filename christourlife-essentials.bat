@@ -191,7 +191,7 @@ else (
 
 :regularEssentials
 cls
-echo You have started the installation of Regular Essentials. Type "exit" to cancel at any time. You will have to uninstall any programs you don't want to keep.
+echo You have started the installation of Regular Essentials. Type "exit" to cancel at any time, and "skip" to skip a program. You will have to uninstall any programs you don't want to keep.
 timeout /t 1 >nul
 echo 1: Google Chrome
 echo 2: Brave
@@ -224,10 +224,17 @@ if "%regularChoice1%"=="1" (
     start /wait "Firefox Setup 118.0.2.exe"
     del "Firefox Setup 118.0.2.exe"
 )   else if "%regularChoice1%"=="exit" goto menu
+    else if "%regularChoice1%"=="skip" set skipCounter=1
 else (
+    if "%skipCounter%"=="1" (
+        echo Skipping...
+        set skipCounter=0
+        timeout /t 1 >nul
+    ) else (
     echo Please select a valid option.
     timeout /t 1 >nul
     goto regularEssentials
+)
 )
 echo 1: Notepad++
 echo 2: Sublime Text
@@ -244,6 +251,17 @@ if "%textEditorChoice%"=="2" (
     curl -s -O https://download.sublimetext.com/sublime_text_build_4192_x64_setup.exe
     start /wait sublime_text_build_4192_x64_setup.exe
 )
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto regularEssentials
+)
+)
 echo 1: VLC Media Player
 echo 2: MPC-HC
 echo 3: PotPlayer
@@ -252,11 +270,7 @@ set /p mediaPlayerChoice= Which media player would you like to install?
 if "%mediaPlayerChoice%"=="1" (
     echo Installing VLC Media Player...
     timeout /t 1 >nul
-    curl -s -O https://get.videolan.org/vlc/3.0.18/win64/vlc-3.0.18-win64.exe        goto menu
-    ) else (
-        echo Please select a valid option.
-        timeout /t 1 >nul
-        goto settings
+    curl -s -O https://ftp.osuosl.org/pub/videolan/vlc/3.0.18/win64/vlc-3.0.18-win64.exe 
     start /wait vlc-3.0.18-win64.exe
     del vlc-3.0.18-win64.exe
 ) else if "%mediaPlayerChoice%"=="2" (
@@ -274,14 +288,20 @@ if "%mediaPlayerChoice%"=="1" (
 ) else if "%mediaPlayerChoice%"=="4" (
     echo Installing KMPlayer...
     timeout /t 1 >nul
-    curl -s -O https://cdn.kmplayer.com/KMP/Download/kmp64bit_2023.9.26.14.exe
-    start /wait kmp64bit_2023.9.26.14.exe
-    del kmp64bit_2023.9.26.14.exe
+    curl -s -O https://update.kmpmedia.net/player/download/kmp64x/en_US
+    start /wait KMP64_2025.1.21.12.exe
+    del KMP64_2025.1.21.12.exe
 ) else if "%mediaPlayerChoice%"=="exit" goto menu
 else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
     echo Please select a valid option.
     timeout /t 1 >nul
     goto regularEssentials
+)
 )
 echo 1: 7-Zip
 echo 2: WinRAR
@@ -303,21 +323,283 @@ if "%archiveManagerChoice%"=="1" (
 ) else if "%archiveManagerChoice%"=="3" (
     echo Installing PeaZip...
     timeout /t 1 >nul
-    curl -s -O https://peazip.github.io/peazip-7.9.0.WIN64.exe
-    start /wait peazip-7.9.0.WIN64.exe
-    del peazip-7.9.0.WIN64.exe
+    curl -s -O https://github.com/peazip/PeaZip/releases/download/10.2.0/peazip-10.2.0.WIN64.exe
+    start /wait peazip-10.2.0.WIN64.exe
+    del peazip-10.2.0.WIN64.exe
 ) else if "%archiveManagerChoice%"=="4" (
     echo Installing Bandizip...
     timeout /t 1 >nul
     curl -s -O https://bandisoft.com/bandizip/dl.php?web
-    start /wait bandizip_installer.exe
-    del bandizip_installer.exe
+    start /wait BANDIZIP-SETUP-STD-ALL.EXE
+    del BANDIZIP-SETUP-STD-ALL.EXE
 ) else if "%archiveManagerChoice%"=="exit" goto menu
 else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
     echo Please select a valid option.
     timeout /t 1 >nul
     goto regularEssentials
 )
+)
 echo The installation of Regular Essentials is complete. Enjoy your new programs!
+timeout /t 3 >nul
+exit
+:developerEssentials
+echo You have started the installation of Developer Essentials. Type "exit" to cancel at any time, and "skip" to skip a program. You will have to uninstall any programs you don't want to keep.
+timeout /t 1 >nul
+echo 1: Visual Studio Code
+echo 2: IntelliJ IDEA
+echo 3: PyCharm
+echo 4: Eclipse
+set /p ideChoice= Which IDE would you like to install?
+if "%ideChoice%"=="1" (
+    echo Installing Visual Studio Code...
+    timeout /t 1 >nul
+    curl -s -O https://update.code.visualstudio.com/latest/win32-x64-user/stable
+    start /wait VSCodeSetup-x64.exe
+    del VSCodeSetup-x64.exe
+) else if "%ideChoice%"=="2" (
+    echo Installing IntelliJ IDEA...
+    timeout /t 1 >nul
+    curl -s -O https://download.jetbrains.com/idea/ideaIC-2021.2.3.exe
+    start /wait ideaIC-2021.2.3.exe
+    del ideaIC-2021.2.3.exe
+) else if "%ideChoice%"=="3" (
+    echo Installing PyCharm...
+    timeout /t 1 >nul
+    curl -s -O https://download.jetbrains.com/python/pycharm-community-2021.2.3.exe
+    start /wait pycharm-community-2021.2.3.exe
+    del pycharm-community-2021.2.3.exe
+) else if "%ideChoice%"=="4" (
+    echo Installing Eclipse...
+    timeout /t 1 >nul
+    curl -s -O https://ftp.osuosl.org/pub/eclipse/oomph/epp/2021-09/R/eclipse-inst-jre-win64.exe
+    start /wait eclipse-inst-jre-win64.exe
+    del eclipse-inst-jre-win64.exe
+) else if "%ideChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto developerEssentials
+)
+)
+echo 1: Git
+echo 2: Docker
+echo 3: Node.js
+echo 4: Python
+set /p devToolChoice= Which development tool would you like to install?
+if "%devToolChoice%"=="1" (
+    echo Installing Git...
+    timeout /t 1 >nul
+    curl -s -O https://github.com/git-for-windows/git/releases/download/v2.33.0.windows.2/Git-2.33.0.2-64-bit.exe
+    start /wait Git-2.33.0.2-64-bit.exe
+    del Git-2.33.0.2-64-bit.exe
+) else if "%devToolChoice%"=="2" (
+    echo Installing Docker...
+    timeout /t 1 >nul
+    curl -s -O https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe
+    start /wait Docker%20Desktop%20Installer.exe
+    del Docker%20Desktop%20Installer.exe
+) else if "%devToolChoice%"=="3" (
+    echo Installing Node.js...
+    timeout /t 1 >nul
+    curl -s -O https://nodejs.org/dist/v14.17.6/node-v14.17.6-x64.msi
+    start /wait msiexec /i node-v14.17.6-x64.msi /quiet /norestart
+    del node-v14.17.6-x64.msi
+) else if "%devToolChoice%"=="4" (
+    echo Installing Python...
+    timeout /t 1 >nul
+    curl -s -O https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe
+    start /wait python-3.9.7-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
+    del python-3.9.7-amd64.exe
+) else if "%devToolChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto developerEssentials
+)
+)
+echo The installation of Developer Essentials is complete. Enjoy your new programs!
+timeout /t 3 >nul
+exit
+:officeEssentials
+echo You have started the installation of Office Essentials. Type "exit" to cancel at any time, and "skip" to skip a program. You will have to uninstall any programs you don't want to keep.
+timeout /t 1 >nul
+echo 1: Office 365
+echo 2: LibreOffice
+set /p officeSuiteChoice= Which office suite would you like to install?
+if "%officeSuiteChoice%"=="1" (
+    echo Installing Office 365...
+    timeout /t 1 >nul
+    curl -s -O https://go.microsoft.com/fwlink/?linkid=2264705&clcid=0x409&culture=en-us&country=us
+    start /wait OfficeSetup.exe
+    del OfficeSetup.exe
+) else if "%officeSuiteChoice%"=="2" (
+    echo Installing LibreOffice...
+    timeout /t 1 >nul
+    curl -s -O https://download.documentfoundation.org/libreoffice/stable/25.2.0/win/x86_64/LibreOffice_25.2.0_Win_x86-64.msi
+    start /wait msiexec /i LibreOffice_25.2.0_Win_x64-64.msi /quiet /norestart
+    del LibreOffice_25.2.0_Win_x64-64.msi
+) else if "%officeSuiteChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto officeEssentials
+)
+)
+echo 1: Adobe Acrobat Reader
+echo 2: Foxit Reader
+set /p pdfReaderChoice= Which PDF reader would you like to install?
+if "%pdfReaderChoice%"=="1" (
+    echo Installing Adobe Acrobat Reader...
+    timeout /t 1 >nul
+    curl -s -O https://get.adobe.com/reader/download/?installer=Reader_DC_2021.007.20099_English_for_Windows&standalone=1
+    start /wait AcroRdrDCx642100720099_en_US.exe
+    del AcroRdrDCx642100720099_en_US.exe
+) else if "%pdfReaderChoice%"=="2" (
+    echo Installing Foxit Reader...
+    timeout /t 1 >nul
+    curl -s -O https://cdn01.foxitsoftware.com/product/reader/desktop/win/11.1.0/FoxitReader110_L10N_Setup_Prom.exe
+    start /wait FoxitReader110_L10N_Setup_Prom.exe
+    del FoxitReader110_L10N_Setup_Prom.exe
+) else if "%pdfReaderChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto officeEssentials
+)
+)
+echo The installation of Office Essentials is complete. Enjoy your new programs!
+timeout /t 3 >nul
+exit
+:gamingEssentials
+echo You have started the installation of Gaming Essentials. Type "exit" to cancel at any time, and "skip" to skip a program. You will have to uninstall any programs you don't want to keep.
+timeout /t 1 >nul
+echo 1: Steam
+echo 2: Epic Games Launcher
+echo 3: GOG Galaxy
+echo 4: Origin
+set /p gameLauncherChoice= Which game launcher would you like to install?
+if "%gameLauncherChoice%"=="1" (
+    echo Installing Steam...
+    timeout /t 1 >nul
+    curl -s -O https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe
+    start /wait SteamSetup.exe
+    del SteamSetup.exe
+) else if "%gameLauncherChoice%"=="2" (
+    echo Installing Epic Games Launcher...
+    timeout /t 1 >nul
+    curl -s -O https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi
+    start /wait msiexec /i EpicInstaller-17.2.0.msi /quiet /norestart
+    del EpicInstaller-17.2.0.msi
+) else if "%gameLauncherChoice%"=="3" (
+    echo Installing GOG Galaxy...
+    timeout /t 1 >nul
+    curl -s -O https://webinstallers.gog-statics.com/download/GOG_Galaxy_2.0.exe
+    start /wait GOG_Galaxy_2.0.exe
+    del GOG_Galaxy_2.0.exe
+) else if "%gameLauncherChoice%"=="4" (
+    echo Installing Origin...
+    timeout /t 1 >nul
+    curl -s -O https://download.dm.origin.com/origin/live/OriginSetup.exe
+    start /wait OriginSetup.exe
+    del OriginSetup.exe
+) else if "%gameLauncherChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto gamingEssentials
+)
+)
+echo 1: Discord
+echo 2: TeamSpeak
+echo 3: Mumble
+set /p socialGamingChoice= Which social gaming platform would you like to install?
+if "%socialGamingChoice%"=="1" (
+    echo Installing Discord...
+    timeout /t 1 >nul
+    curl -s -O https://discord.com/api/download?platform=win
+    start /wait DiscordSetup.exe
+    del DiscordSetup.exe
+) else if "%socialGamingChoice%"=="2" (
+    echo Installing TeamSpeak...
+    timeout /t 1 >nul
+    curl -s -O https://files.teamspeak-services.com/releases/client/3.5.6/TeamSpeak3-Client-win64-3.5.6.exe
+    start /wait TeamSpeak3-Client-win64-3.5.6.exe
+    del TeamSpeak3-Client-win64-3.5.6.exe
+) else if "%socialGamingChoice%"=="3" (
+    echo Installing Mumble...
+    timeout /t 1 >nul
+    curl -s -O https://dl.mumble.info/latest/stable/client-windows-x64
+    start /wait msiexec /i mumble_client-1.5.735.x64.msi /quiet /norestart
+    del mumble_client-1.5.735.x64.msi
+) else if "%socialGamingChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto gamingEssentials
+)
+)
+echo 1: OBS Studio
+echo 2: XSplit
+set /p screenRecorderChoice= Which screen recorder would you like to install?
+if "%screenRecorderChoice%"=="1" (
+    echo Installing OBS Studio...
+    timeout /t 1 >nul
+    curl -s -O https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.1.3-Full-Installer-x64.exe
+    start /wait OBS-Studio-27.1.3-Full-Installer-x64.exe
+    del OBS-Studio-27.1.3-Full-Installer-x64.exe
+) else if "%screenRecorderChoice%"=="2" (
+    echo Installing XSplit...
+    timeout /t 1 >nul
+    curl -s -O  https://cdn2.xsplit.com/download/bc/m54/4.5.2501.2802/xbc_web_installer_4.5.2501.2802.exe
+    start /wait xbc_web_installer_4.5.2501.2802.exe
+    del xsplit.vc.4.0.2007.2902.exe
+) else if "%screenRecorderChoice%"=="exit" goto menu
+else (
+    if ("%skipCounter%"=="1") (
+        echo Skipping...
+        timeout /t 1 >nul
+        set skipCounter=0
+    ) else (
+    echo Please select a valid option.
+    timeout /t 1 >nul
+    goto gamingEssentials
+)
+)
+echo The installation of Gaming Essentials is complete. Enjoy your new programs!
 timeout /t 3 >nul
 exit
