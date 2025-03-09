@@ -1,4 +1,6 @@
 @echo off
+REM READ!!!!!! -------------------------------------------------------------------------------------------------------------------
+REM This file is DEPRECATED and is being replaced by PYTHON! LET THE SNAKES OVERTAKE YOU!
 setlocal enabledelayedexpansion
 set rootPath="C:\ChristOurLife\Launcher"
 REM make the scary whooloshanwloohoo directories if first time
