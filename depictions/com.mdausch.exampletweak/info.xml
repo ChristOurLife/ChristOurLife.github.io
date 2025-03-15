@@ -1,0 +1,30 @@
+<packageInfo>
+    <bundleId>ai.akemi.appsyncunified</bundleId>
+    <name>AppSync Unified</name>
+    <version>113.0</version>
+    <descriptions>
+        <description>
+            The one and only AppSync Unified.
+        </description>
+        <description>
+            Fun fact: 1+1=2.
+        </description>
+    </descriptions>
+    <compatibility>
+        <miniOS>5.0.0</miniOS>
+        <maxiOS>18.0.0</maxiOS>
+    </compatibility>
+    <dependencies>
+    </dependencies>
+    <changelog>
+        <change>
+            <changeVersion>V1.0.0 </changeVersion>
+            <changeDescription>This is where your parents died, OOPS OOPS</changeDescription>
+            <changeDescription>This is where my parents died, Batmane</changeDescription>
+        </change>
+        <change>
+            <changeVersion>V1.0.0</changeVersion>
+            <changeDescription>Initial Release</changeDescription>
+        </change>
+    </changelog>
+</packageInfo>
