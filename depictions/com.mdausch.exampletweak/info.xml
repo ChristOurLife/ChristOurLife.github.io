@@ -1,31 +1,29 @@
 <packageInfo>
-    <bundleId>ch.mdaus.exampletweak</bundleId>
-    <name>Example Tweak</name>
-    <version>0.0.2</version>
+    <bundleId>ai.akemi.appsyncunified</bundleId>
+    <name>AppSync Unified</name>
+    <version>113.0</version>
     <descriptions>
         <description>
-            An example package for testing out our personal Cydia repository
+            The one and only AppSync Unified.
         </description>
         <description>
-            This is just a bit more detail about what the tweak does... nothing :)
+            Fun fact: 1+1=2.
         </description>
     </descriptions>
     <compatibility>
-        <miniOS>11.0</miniOS>
-        <maxiOS>11.1.2</maxiOS>
+        <miniOS>5.0.0</miniOS>
+        <maxiOS>18.0.0</maxiOS>
     </compatibility>
     <dependencies>
-        <dependency>mobilesubstrate</dependency>
-        <dependency>some other dependency</dependency>
     </dependencies>
     <changelog>
         <change>
-            <changeVersion>V0.0.2 </changeVersion>
-            <changeDescription>An important change</changeDescription>
-            <changeDescription>Another important change</changeDescription>
+            <changeVersion>V1.0.0 </changeVersion>
+            <changeDescription>This is where your parents died, OOPS OOPS</changeDescription>
+            <changeDescription>This is where my parents died, Batmane</changeDescription>
         </change>
         <change>
-            <changeVersion>V0.0.1</changeVersion>
+            <changeVersion>V1.0.0</changeVersion>
             <changeDescription>Initial Release</changeDescription>
         </change>
     </changelog>
